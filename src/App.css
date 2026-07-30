@@ -113,9 +113,6 @@
   outline: none;
   background: #fff;
   cursor: pointer;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
 }
 
 .whatsapp-form__select:focus {
