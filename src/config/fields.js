@@ -153,7 +153,7 @@ export const fields = [
     dependsOn: {
       field: "modalidade",
       values: [
-        "Construção em Terreno Próprio",
+        "Construção em Terreno Próprio (somente com terreno já quitado)",
         "Aquisição de Terreno e Construção",
       ],
     },
@@ -183,7 +183,7 @@ export const fields = [
     dependsOn: {
       field: "modalidade",
       values: [
-        "Construção em Terreno Próprio",
+        "Construção em Terreno Próprio (somente com terreno já quitado)",
         "Aquisição de Terreno e Construção",
       ],
     },
