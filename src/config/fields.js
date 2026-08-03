@@ -55,7 +55,7 @@ export const fields = [
     options: [
       "Aquisição de Imóvel Usado",
       "Aquisição de Imóvel Novo",
-      "Construção em Terreno Próprio",
+      "Construção em Terreno Próprio (somente com terreno já quitado)",
       "Aquisição de Terreno e Construção",
       "Reforma",
       "Ampliação",
@@ -130,6 +130,87 @@ export const fields = [
     placeholder: "Digite a Cidade",
   },
   {
+    id: "valorDoImovel",
+    label: "Qual o valor do Imóvel?",
+    type: "text",
+    inputMode: "numeric",
+    icon: DollarSign,
+    required: true,
+    placeholder: "R$ 0,00",
+    dependsOn: {
+      field: "modalidade",
+      values: ["Aquisição de Imóvel Usado", "Aquisição de Imóvel Novo"],
+    },
+  },
+  {
+    id: "valorDoLote",
+    label: "Qual o valor total do lote?",
+    type: "text",
+    inputMode: "numeric",
+    icon: DollarSign,
+    required: true,
+    placeholder: "R$ 0,00",
+    dependsOn: {
+      field: "modalidade",
+      values: [
+        "Construção em Terreno Próprio",
+        "Aquisição de Terreno e Construção",
+      ],
+    },
+  },
+  {
+    id: "saldoDevedor",
+    label:
+      "Qual o saldo devedor do lote? Se ainda não começou a pagar, digite o valor total do Lote",
+    type: "text",
+    inputMode: "numeric",
+    icon: DollarSign,
+    required: true,
+    placeholder: "R$ 0,00",
+    dependsOn: {
+      field: "modalidade",
+      value: "Aquisição de Terreno e Construção",
+    },
+  },
+  {
+    id: "valorDaObra",
+    label: "Qual o custo total da obra?",
+    type: "text",
+    inputMode: "numeric",
+    icon: DollarSign,
+    required: true,
+    placeholder: "R$ 0,00",
+    dependsOn: {
+      field: "modalidade",
+      values: [
+        "Construção em Terreno Próprio",
+        "Aquisição de Terreno e Construção",
+      ],
+    },
+  },
+  {
+    id: "valorFinanciado",
+    label: "Qual valor pretende financiar?",
+    type: "text",
+    inputMode: "numeric",
+    icon: DollarSign,
+    required: true,
+    placeholder: "R$ 0,00",
+  },
+  {
+    id: "valorFinanciadoLote",
+    label: "Desse valor, quanto será destinado a quitação do lote?",
+    type: "text",
+    inputMode: "numeric",
+    icon: DollarSign,
+    required: true,
+    placeholder: "R$ 0,00",
+    dependsOn: {
+      field: "modalidade",
+      value: "Aquisição de Terreno e Construção",
+    },
+  },
+  {
     id: "recursosProprios",
     label:
       "Qual o Valor de Recursos Próprios para a Entrada? Sem Somar FGTS em caso de uso. ",
@@ -141,16 +222,21 @@ export const fields = [
   },
   {
     id: "valorFGTS",
-    label: "Pretende utilizar FGTS? Se sim, qual valor?",
+    label: "Se proposta com uso de FGTS, qual valor a ser utilizado?",
     type: "text",
     inputMode: "numeric",
     icon: DollarSign,
-    required: true,
+    required: false,
     placeholder: "R$ 0,00",
   },
 ];
 
 export function isFieldActive(field, values) {
   if (!field.dependsOn) return true;
+
+  if (field.dependsOn.values) {
+    return field.dependsOn.values.includes(values[field.dependsOn.field]);
+  }
+
   return values[field.dependsOn.field] === field.dependsOn.value;
 }

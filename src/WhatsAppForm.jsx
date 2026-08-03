@@ -20,6 +20,12 @@ const formatters = {
   nascimento: formatDate,
   recursosProprios: formatCurrency,
   valorFGTS: formatCurrency,
+  valorDoImovel: formatCurrency,
+  valorDoLote: formatCurrency,
+  valorDaObra: formatCurrency,
+  valorFinanciado: formatCurrency,
+  saldoDevedor: formatCurrency,
+  valorFinanciadoLote: formatCurrency,
 };
 
 export default function WhatsAppForm() {
